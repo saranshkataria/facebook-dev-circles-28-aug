@@ -52,8 +52,8 @@ def add_walkin():
 
 
 @app.route('/event/<id>/send_invite')
-def send_invite():
-    pass
+def send_invite(request):
+    event_attendee_ids = request.form.get('id_list')
 
 
 @app.route('/event/<id>/edit')
