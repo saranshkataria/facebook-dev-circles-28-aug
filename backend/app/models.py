@@ -3,12 +3,10 @@ from sqlalchemy_utils import ChoiceType, EmailType, JSONType
 from app import db
 from app import app
 
-
-
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(EmailType, unique=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement = True)
+    email = db.Column(db.EmailType, unique=True)
+    password = db.Column(db.String(120))
 
     def __repr__(self):
         return '<User %r>' % self.username
