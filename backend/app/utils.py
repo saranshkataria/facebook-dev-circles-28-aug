@@ -1,7 +1,7 @@
 import smtplib
 from config import EMAIL_ID, PASSWORD, FROM, SMTP_SERVER, SMTP_PORT
 
-def is_send_email(email_dict, html_template, subject):
+def is_send_email_success(email_dict, html_template, subject):
     TO = email_dict['email']
     SUBJECT = subject
 
