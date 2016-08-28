@@ -61,6 +61,7 @@ def import_csv():
 # Attendee list for a event {ID}
 @app.route('/event/<id>/attendees')
 def attendees():
+    pass
 
 # Add walk-in for event {ID}
 @app.route('/event/<id>/attendees/add_walkin')
