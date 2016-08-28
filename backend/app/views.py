@@ -1,12 +1,30 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
-
+import hashlib
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
 
-from app import views, models
+from app.models import User
 
+
+@app.route('/register')
+def register():
+	parser = reqparse.RequestParser()
+	parser.add_argument('email', type=str)
+	parser.add_argument('token', type=str)
+	args = parser.parse_args()
+	email = args['email']
+	token = args['token']
+	password = hashlib.md5(token.encode())
+	user = User.query.filter_by(email = email)
+	if user:
+		return jsonify(user.password)
+	else :
+		user  = User(email = email , password = password)
+		db.session.add(user)
+		db.session.commit()
+	return jsonify(password)
 
 @app.route('/')
 def home():
