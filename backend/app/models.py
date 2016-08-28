@@ -1,5 +1,8 @@
 from sqlalchemy_utils import ChoiceType, EmailType, JSONType
-from event_management import db
+
+from app import db
+from app import app
+
 
 
 class User(db.Model):
@@ -27,7 +30,7 @@ class Event(db.Model):
     time = db.Column(db.DateTime())
     desc = db.Column(db.Text())
     capacity = db.Column(db.Integer())
-    email_template = db.Column(db.Text(), required=False)
+    email_template = db.Column(db.Text(), nullable=True)
 
 
 class EventAttendee(db.Model):
