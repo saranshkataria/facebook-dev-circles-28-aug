@@ -5,7 +5,7 @@ from app import app
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement = True)
-    email = db.Column(db.EmailType, unique=True)
+    email = db.Column(EmailType, unique=True)
     password = db.Column(db.String(120))
 
     def __repr__(self):

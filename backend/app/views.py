@@ -1,6 +1,9 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 import hashlib
+from flask_restful import reqparse
+
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
@@ -8,7 +11,7 @@ db = SQLAlchemy(app)
 from app.models import User
 
 
-@app.route('/register')
+@app.route('/register/', methods = ['POST'])
 def register():
 	parser = reqparse.RequestParser()
 	parser.add_argument('email', type=str)
@@ -21,6 +24,7 @@ def register():
 	if user:
 		return jsonify(user.password)
 	else :
+		print 5
 		user  = User(email = email , password = password)
 		db.session.add(user)
 		db.session.commit()
@@ -30,9 +34,6 @@ def register():
 def home():
     pass
 
-@app.route('/register')
-def register():
-    pass
 
 @app.route('/login')
 def login():
@@ -61,7 +62,7 @@ def import_csv():
 # Attendee list for a event {ID}
 @app.route('/event/<id>/attendees')
 def attendees():
-
+	pass
 # Add walk-in for event {ID}
 @app.route('/event/<id>/attendees/add_walkin')
 def add_walkin():
@@ -86,5 +87,3 @@ def stats():
 def validate_qr():
     pass
 
-if __name__ == "__main__":
-    app.run(debug=True)
