@@ -62,7 +62,12 @@ def import_csv():
 # Attendee list for a event {ID}
 @app.route('/event/<id>/attendees')
 def attendees():
+<<<<<<< HEAD
 	pass
+=======
+    pass
+
+>>>>>>> c84e8099d13d813580532ab4aa464af9adf3f0be
 # Add walk-in for event {ID}
 @app.route('/event/<id>/attendees/add_walkin')
 def add_walkin():
@@ -70,8 +75,8 @@ def add_walkin():
 
 # Send invite and update DB
 @app.route('/event/<id>/send_invite')
-def send_invite():
-    pass
+def send_invite(request):
+    event_attendee_ids = request.form.get('id_list')
 
 # Edit event
 @app.route('/event/<id>/edit')
